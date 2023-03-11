@@ -33,7 +33,7 @@ module SubstitutionCipher
       lookup_table = (0..127).to_a.shuffle(random: rng)
       encrypted_doc = ''
       document.to_s.chars do |char|
-        encrypted_doc += lookup_table[char.ord - 32].chr
+        encrypted_doc += lookup_table[char.ord].chr
       end
       encrypted_doc
     end
@@ -49,7 +49,7 @@ module SubstitutionCipher
       lookup_table = (0..127).to_a.shuffle(random: rng)
       decrypted_doc = ''
       document.to_s.chars do |char|
-        decrypted_doc += (lookup_table.index(char.ord) + 32).chr
+        decrypted_doc += lookup_table.index(char.ord).chr
       end
       decrypted_doc
     end
