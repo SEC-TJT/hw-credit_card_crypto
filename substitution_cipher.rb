@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SubstitutionCipher
   module Caesar
     # Encrypts document using key
@@ -27,6 +29,13 @@ module SubstitutionCipher
     # Returns: String
     def self.encrypt(document, key)
       # TODO: encrypt string using a permutation cipher
+      rng = Random.new(key)
+      lookup_table = (0..127).to_a.shuffle(random: rng)
+      encrypted_doc = ''
+      document.to_s.chars do |char|
+        encrypted_doc += lookup_table[char.ord - 32].chr
+      end
+      encrypted_doc
     end
 
     # Decrypts String document using integer key
@@ -36,6 +45,13 @@ module SubstitutionCipher
     # Returns: String
     def self.decrypt(document, key)
       # TODO: decrypt string using a permutation cipher
+      rng = Random.new(key)
+      lookup_table = (0..127).to_a.shuffle(random: rng)
+      decrypted_doc = ''
+      document.to_s.chars do |char|
+        decrypted_doc += (lookup_table.index(char.ord) + 32).chr
+      end
+      decrypted_doc
     end
   end
 end
