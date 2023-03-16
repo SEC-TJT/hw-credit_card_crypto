@@ -1,13 +1,10 @@
+# implement the double transposition cipher
 module DoubleTranspositionCipher
   def self.encrypt(document, key)
     # TODO: FILL THIS IN!
     x, y = find_rows_cols(document.size)
-    # puts "x is #{x}, y is #{y}"
     matrix = to_matrix(document, x, y)
-    # puts matrix.size
-    # puts '--------------------------------'
     matrix = rowchange(matrix, generate_permutation(x, key))
-    # puts matrix
     matrix = matrix.transpose
     matrix = rowchange(matrix, generate_permutation(y, key + x))
     matrix = matrix.transpose
@@ -23,9 +20,7 @@ module DoubleTranspositionCipher
   def self.decrypt(ciphertext, key)
     # TODO: FILL THIS IN!
     x, y = find_rows_cols(ciphertext.size)
-
     matrix = to_matrix(ciphertext, x, y)
-    # puts matrix
     matrix = matrix.transpose
     matrix = recover_rowchange(matrix, generate_permutation(y, key + x))
     matrix = matrix.transpose
@@ -54,12 +49,9 @@ module DoubleTranspositionCipher
   end
 
   def self.rowchange(arr, order)
-    # puts "Array length:#{arr[0].length}"
-    # puts order
     change_arr = Array.new(arr.size) { Array.new(arr[0].length) }
     arr.each_with_index do |_row, i|
       change_arr[i] = arr[order[i] - 1]
-      # puts "row :#{change_arr[i]}"
     end
     change_arr
   end
@@ -74,12 +66,6 @@ module DoubleTranspositionCipher
 
   def self.generate_permutation(size, key)
     srand(key)
-    (1..size).to_a.shuffle(random: Random.new(key%23))
+    (1..size).to_a.shuffle(random: Random.new(key % 23))
   end
-  # def self.generate_permutation(size, key)
-  #   arr_permutation = (1..size).to_a.permutation.to_a
-  #   srand(key)
-  #   index = rand(arr_permutation.length)
-  #   arr_permutation[index]
-  # end
 end
