@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # implement the double transposition cipher
 module DoubleTranspositionCipher
   def self.encrypt(document, key)
