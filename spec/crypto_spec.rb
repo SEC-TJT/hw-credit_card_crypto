@@ -44,7 +44,7 @@ describe 'Test card info encryption' do
   #       Can you DRY out the tests using metaprogramming? (see lecture slide)
   describe 'Using Double Transposition cipher' do
     it 'should encrypt card information' do
-      enc =  DoubleTranspositionCipher.encrypt(@cc.to_s, @key)
+      enc = DoubleTranspositionCipher.encrypt(@cc.to_s, @key)
       _(enc).wont_equal @cc.to_s
       _(enc).wont_be_nil
     end
