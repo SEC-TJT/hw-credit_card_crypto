@@ -9,6 +9,20 @@ module SubstitutionCipher
     # Returns: String
     def self.encrypt(document, key)
       # TODO: encrypt string using caesar cipher
+      result = ''
+      document.each_char do |char|
+        if char.ord.between?(32, 126)
+          shifted_char = caesar(char, key)
+          result += shifted_char
+        else
+          result += char
+        end
+      end
+      result
+    end
+
+    def self.caesar(char, key)
+      ((char.ord - 32 + key) % 95 + 32).chr
     end
 
     # Decrypts String document using integer key
@@ -18,6 +32,7 @@ module SubstitutionCipher
     # Returns: String
     def self.decrypt(document, key)
       # TODO: decrypt string using caesar cipher
+      encrypt(document, -key)
     end
   end
 
