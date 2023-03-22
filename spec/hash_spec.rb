@@ -27,8 +27,8 @@ describe 'Test hashing requirements' do
       # TODO: Check that each card produces the same hash if hashed repeatedly
       it 'Check that each card produces the same hash if hashed repeatedly' do
         cards.each do |card|
+          _(card.hash).wont_be_nil
           _(card.hash).must_equal card.hash
-          _(card).wont_be_nil
         end
       end
     end
